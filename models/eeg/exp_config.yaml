@@ -1,0 +1,237 @@
+wandb:
+  use_wandb: false
+  project: brainmagick
+  group: brainmagick-group
+num_prints: 5
+device: cuda
+num_workers: 5
+verbose: 1
+show: 0
+download_only: false
+slurm:
+  mem_per_gpu: 100
+  time: 4320
+continue_sig: null
+continue_best: true
+seed: 2036
+dummy: null
+cache: C:\Users\hpeadmin\Documents\ai-use-cases\MSG-traffic-management\test\brainmagick\cache
+features_models: ./features_models
+early_stop_patience: 10
+eval_every: 1
+eval_train_set: false
+optim:
+  name: adam
+  lr: 0.0003
+  beta2: 0.999
+  epochs: 200
+  batch_size: 256
+  loss: clip
+  use_weighting: false
+  max_batches: 1200
+  svd: 0.0
+  negatives: null
+  negative_pool_size: null
+clip:
+  linear: null
+  twin: true
+  pool: false
+  tmin: null
+  tmax: null
+  tmin_train: null
+  tmax_train: null
+  center: false
+test:
+  wer_negatives: 10000
+  wer_topx: 10
+  wer_random: false
+  wer_recordings: 40
+  wer_study: null
+dset:
+  selections:
+  - brennan2019
+  tmin: -0.5
+  tmax: 2.5
+  n_recordings: 33
+  n_subjects: null
+  n_subjects_test: null
+  shuffle_recordings_seed: -1
+  skip_recordings: 0
+  test_ratio: 0.2
+  valid_ratio: 0.1
+  remove_ratio: 0.0
+  condition: 0.5
+  apply_baseline: true
+  min_block_duration: 6
+  force_uid_assignement: false
+  min_n_blocks_per_split: 1
+  ignore_end_in_block: false
+  ignore_start_in_block: false
+  sample_rate: 120
+  highpass: 0
+  event_mask: true
+  split_wav_as_block: true
+  allow_empty_split: false
+  autoreject: false
+  test:
+    tmin: null
+    tmax: null
+    condition: word
+  features:
+  - Wav2VecTransformer
+  extra_test_features: []
+  features_params:
+    MelSpectrum:
+      n_fft: 512
+      n_mels: 120
+      normalized: true
+      use_log_scale: true
+      log_scale_eps: 1.0e-05
+    Pitch:
+      min_f0: 100
+      max_f0: 350
+    WordHash:
+      buckets: 100000
+    XlmEmbedding:
+      contextual: false
+    WordEmbedding:
+      lang: auto
+    WordEmbeddingSmall:
+      lang: auto
+    PartOfSpeech:
+      lang: auto
+    Wav2VecTransformer:
+      layers:
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      device: cpu
+      random: false
+    Wav2VecChunk:
+      device: cpu
+override_n_subjects_model: null
+norm:
+  scaler:
+    per_channel: false
+    n_samples_per_recording: 200
+    n_samples_features: 8000
+  max_scale: 20.0
+  clip: true
+  exclude_empty_features: false
+task:
+  type: decode
+  meg_init: 0.3
+  lowpass: 0
+  offset_meg_ms: 150
+  lowpass_gt: true
+  lowpass_gt_test: false
+  mask_loss: false
+dora:
+  dir: ./outputs
+  exclude:
+  - wandb.*
+  - num_prints
+  - device
+  - num_workers
+  - verbose
+  - cache
+  - features_models
+  git_save: true
+model_name: simpleconv
+convrnn:
+  concatenate: false
+  depth: 2
+  linear_out: false
+  complex_out: false
+  kernel_size: 4
+  stride: 2
+  growth: 1.0
+  lstm: 4
+  bidirectional_lstm: false
+  flip_lstm: false
+  attention: 0
+  heads: 4
+  conv_dropout: 0.0
+  lstm_dropout: 0.0
+  dropout_input: 0.0
+  batch_norm: false
+  relu_leakiness: 0.0
+  subject_dim: 64
+  embedding_location:
+  - lstm
+  embedding_scale: 1.0
+  subject_layers: false
+  subject_layers_dim: input
+simpleconv:
+  concatenate: false
+  depth: 10
+  linear_out: false
+  complex_out: true
+  kernel_size: 3
+  dilation_growth: 2
+  dilation_period: 5
+  skip: true
+  post_skip: false
+  growth: 1.0
+  scale: null
+  rewrite: false
+  groups: 1
+  glu: 2
+  glu_context: 1
+  glu_glu: true
+  gelu: true
+  dual_path: 0
+  conv_dropout: 0.0
+  dropout_input: 0.0
+  batch_norm: true
+  relu_leakiness: 0.0
+  subject_dim: 0
+  subject_layers: true
+  embedding_scale: 1.0
+  subject_layers_dim: input
+  subject_layers_id: false
+  n_fft: null
+  fft_complex: true
+  merger: true
+  merger_pos_dim: 2048
+  merger_channels: 270
+  merger_dropout: 0.2
+  merger_penalty: 0.0
+  merger_per_subject: false
+  dropout: 0.0
+  dropout_rescale: true
+  initial_linear: 270
+  initial_depth: 1
+  initial_nonlin: false
+  hidden:
+    meg: 320
+feature_model_name: null
+selections:
+  audio_mous:
+    study: schoffelen2019
+    modality: audio
+    events_filter: null
+  audio_mous_wl:
+    study: schoffelen2019
+    modality: audio
+    events_filter: condition == "word_list"
+  visual_mous:
+    study: schoffelen2019
+    modality: visual
+    events_filter: null
+  gwilliams2022:
+    study: gwilliams2022
+  broderick2019:
+    study: broderick2019
+  fake:
+    study: fake
+  brennan2019:
+    study: brennan2019
+study_paths:
+  default:
+    gwilliams2022: .\data\gwilliams2022\
+    schoffelen2019: .\data\schoffelen2019\
+    brennan2019: C:\Users\hpeadmin\Documents\ai-use-cases\MSG-traffic-management\test\brainmagick\data\brennan2019\
+    broderick2019: .\data\broderick2019\

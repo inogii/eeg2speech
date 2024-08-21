@@ -1,0 +1,4 @@
+in_channels:
+  meg: 270
+out_channels: 1024
+n_subjects: 33

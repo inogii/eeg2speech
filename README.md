@@ -50,8 +50,8 @@ the dataset is publicly available on Hugging Face. It is a modified version of t
 to simplify the download process, you can use the following commands. These commands utilize the [hfdownloader](https://github.com/bodaay/HuggingFaceModelDownloader) tool, which allows for faster, multithreaded downloads from Hugging Face.
 
 ```shell
-./hfdownloader -d inogii/audioeeg -c 10 -s /root/AudioLDM-training-finetuning/data/dataset
-./hfdownloader -d inogii/audioldm_checkpoints -c 10 -s /root/AudioLDM-training-finetuning/data/checkpoints
+./hfdownloader -d inogii/audioeeg -c 10 -s /root/eeg2speech/data/dataset
+./hfdownloader -d inogii/audioldm_checkpoints -c 10 -s /root/eeg2speech/data/checkpoints
 python merge_chunks.py
 unzip -o -d data/dataset/ data/dataset/inogii_audioeeg/audioeeg.zip
 unzip -o -d data/ data/checkpoints/reassembled_checkpoints.zip
